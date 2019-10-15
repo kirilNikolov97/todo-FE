@@ -1,2 +1,7 @@
 Welcome, {{name}}!!!
 You can see your todos <a routerLink="/todos">here</a>!
+<button (click)="getWelcomeMessage()" class="btn btn-success">Click here for hello world!</button>
+<button (click)="getWelcomeMessageWithParameter()" class="btn btn-success">Click here for hello world!</button>
+<div *ngIf="welcomeMessageFromBean">
+  {{welcomeMessageFromBean}}
+</div>
