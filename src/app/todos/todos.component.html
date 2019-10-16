@@ -1,9 +1,12 @@
+<div class="alert alert-primary" *ngIf="message"> {{message}} </div>
 <table class="table">
   <thead>
   <tr>
     <th scope="col">#</th>
-    <th scope="col">First</th>
-    <th scope="col">Last</th>
+    <th scope="col">Description</th>
+    <th scope="col">Target Date</th>
+    <th scope="col">Is Achieved?</th>
+    <th scope="col">Remove</th>
   </tr>
   </thead>
   <tbody>
@@ -12,6 +15,9 @@
     <td>{{todo.description}}</td>
     <td>{{todo.targetDate | date}}</td>
     <td>{{todo.isAchieved}}</td>
+    <td>
+      <button (click)="deleteTodoService(todo.id)" class="btn btn-danger">Delete</button>
+    </td>
   </tr>
   </tbody>
 </table>

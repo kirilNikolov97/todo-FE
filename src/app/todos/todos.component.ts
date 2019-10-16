@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {RetrieveTodosService} from '../service/data/retrieve-todos.service';
 
 @Component({
   selector: 'app-todos',
@@ -7,15 +8,34 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TodosComponent implements OnInit {
 
-  todos = [
-    new Todo(1, 'Java Expert', new Date(), false),
-    new Todo(2, 'Angular Expert', new Date(), false)
-  ];
+  todos: Todo[];
+  message: string;
 
-  constructor() {
+  constructor(private service: RetrieveTodosService) {
   }
 
   ngOnInit() {
+    this.refreshTodos();
+  }
+
+  refreshTodos() {
+    this.service.getAllTodos('pesho').subscribe(
+      response => {
+        this.todos = response;
+        console.log(this.todos);
+      }
+    );
+  }
+
+
+  deleteTodoService(id: number) {
+    this.service.deleteTodo('pesho', id).subscribe(
+      response => {
+        console.log(response);
+        this.message = `Deleted todo with id: ${id}`;
+        this.refreshTodos();
+      }
+    );
   }
 
 }
@@ -27,5 +47,6 @@ export class Todo {
     public description: string,
     public targetDate: Date,
     public isAchieved: boolean
-  ) {}
+  ) {
+  }
 }
